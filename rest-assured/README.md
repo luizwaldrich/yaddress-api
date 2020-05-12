@@ -13,4 +13,7 @@ Just open this project in an IDE of your preference (I use Intellij) and run the
 #### Running 
 - open your terminal in the [rest-assured](/rest-assured) project's folder
 - run `mvn clean install` to download all the dependencies and run the tests
-- you can also run `mvn test` if you have already downloaded all the dependencies
+- you can also run `mvn test` if you have already downloaded all the 
+- in the end, you should see this:
+
+![mvn-test-results](/rest-assured/tutorial-img/results.png)

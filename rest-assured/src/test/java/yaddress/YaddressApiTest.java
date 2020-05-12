@@ -93,6 +93,21 @@ public class YaddressApiTest {
     }
 
     @Test
+    public void validStreetInWrongCity_shouldReturnStreetNotFoundInCityStateError() {
+        this.params.put("AddressLine1", "Mapple street 150");
+        this.params.put("AddressLine2", "NY New York");
+        RestAssured.with().params(params)
+                .get(url)
+                .then().statusCode(200)
+                .assertThat()
+                .body("ErrorCode", CoreMatchers.equalTo(3))
+                .body("ErrorMessage", CoreMatchers.equalTo("Street not found in city/state"))
+                .body("Number", CoreMatchers.equalTo("150"))
+                .body("Street", CoreMatchers.equalTo(""))
+                .body("City", CoreMatchers.equalTo("NEW YORK"));
+    }
+
+    @Test
     public void validUSAddressWithInvalidCity_shouldReturnInvalidCityError() {
         this.params.put("AddressLine1", "506 4TH AVE APT 1");
         this.params.put("AddressLine2", "MUNICH DE");

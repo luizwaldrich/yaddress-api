@@ -3,5 +3,6 @@ Valid US Address,506 4TH AVE APT 1,ASBURY PARK NJ 07712-6086,0,,506,4TH,ASBURY P
 Empty Addresses Lines,,,2,Invalid address: invalid City-State-Zip line,,,
 Informing special characters,!@#$%*,!@#$%*,2,Invalid address: invalid City-State-Zip line,,,
 Valid Brazilian Address,Xanxere street 650,Joinville 89221-550,3,Street not found in Zip code,650,,JOINVILLE
+Valid street in wrong city,Mapple street 150,NY New York,3,Street not found in city/state,150,,NEW YORK
 Valid US Address with invalid city,506 4TH AVE APT 1,MUNICH DE,4,City not found in state,506,,MUNICH
 Valid US Address with invalid house number,123456 4TH AVE APT 1,ASBURY PARK NJ 07712-6086,8,No such house number in the street,123456,4TH,ASBURY PARK
