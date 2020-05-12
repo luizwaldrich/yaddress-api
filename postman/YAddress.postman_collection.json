@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "86a9ca91-5052-45ef-a58d-97b39723ba9e",
+		"name": "YAddress",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Address",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3d03f33f-cba9-40b2-9839-2640b1ad64f0",
+						"exec": [
+							"pm.environment.set(\"addressLine1\", data.addressLine1);",
+							"pm.environment.set(\"addressLine2\", data.addressLine2);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "1b48ab68-5adb-439d-8989-9535b468614d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var description = data.description + \" should return \";",
+							"if (!data.errorMessage) {",
+							"    description += \"no error message.\";",
+							"} else {",
+							"    description += \"'\" + data.errorMessage + \"'.\";",
+							"}",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(description, function () {",
+							"    pm.expect(jsonData.ErrorCode).to.eql(data.errorCode);",
+							"    pm.expect(jsonData.ErrorMessage).to.eql(data.errorMessage);",
+							"});",
+							"",
+							"var number = data.number ? data.number : \"empty\";",
+							"pm.test(\"Number is \" + number, function () {",
+							"    pm.expect(Number(jsonData.Number)).to.eql(Number(data.number));",
+							"});",
+							"",
+							"var street = data.street ? data.street : \"empty\";",
+							"pm.test(\"Street is \" + street, function () {",
+							"    pm.expect(jsonData.Street).to.eql(data.street);",
+							"});",
+							"",
+							"var city = data.city ? data.city : \"empty\";",
+							"pm.test(\"City is \" + city, function () {",
+							"    pm.expect(jsonData.City).to.eql(data.city);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.yaddress.net/api/address?AddressLine1={{addressLine1}}&AddressLine2={{addressLine2}}",
+					"protocol": "http",
+					"host": [
+						"www",
+						"yaddress",
+						"net"
+					],
+					"path": [
+						"api",
+						"address"
+					],
+					"query": [
+						{
+							"key": "AddressLine1",
+							"value": "{{addressLine1}}"
+						},
+						{
+							"key": "AddressLine2",
+							"value": "{{addressLine2}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
